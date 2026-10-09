@@ -1,0 +1,44 @@
+# Test settings: the maintainer's own PRs are reviewed, and no linked issue is needed.
+version: 1
+
+review:
+  model: claude-opus-5-5
+  effort: medium
+
+gate:
+  deadline_hours: 48
+  max_attempts: 3
+  close_on_fail: true
+  fail_confidence: 0.8
+  exempt_maintainers: false
+  exempt_prior_contributors: false
+
+checks:
+  require_linked_issue: false
+  forbidden_paths:
+    - ".github/**"
+    - ".bouncer.yml"
+
+guidance: |
+  slugkit is a single-function, zero-dependency library. We do not accept new
+  dependencies, new public functions, or cosmetic-only changes.
+
+rules:
+  - id: fixes-something-real
+    hard: true
+    description: The change fixes a real, demonstrable defect or adds clearly useful behavior, and the description matches what the code actually does.
+  - id: not-duplicate
+    hard: true
+    description: It does not duplicate an open pull request and is not already handled on the base branch.
+  - id: correct
+    hard: true
+    description: No evident bugs, regressions or nonsensical code (for example calls to APIs that do not exist).
+  - id: substantive
+    hard: true
+    description: Not a trivial cosmetic change (reformatting, renames, comment rewording).
+  - id: in-scope
+    hard: true
+    description: Fits the project's stated scope in CONTRIBUTING.md and the guidance (zero dependencies, single function).
+  - id: has-tests
+    hard: false
+    description: Behavior changes come with tests.
