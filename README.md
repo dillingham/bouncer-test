@@ -7,4 +7,4 @@ from slugkit import slugify
 slugify("Héllo World")  # "hello-world"
 ```
 
-This repository is a test bed for [bouncer](https://github.com/dillingham/bouncer).
+This repository is a test bed for [bouncer](https://github.com/pr-bouncer/bouncer).
